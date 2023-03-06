@@ -18,7 +18,7 @@
 - **View** : HTML, CSS, Javascript
 - **Tool** : Git, Notion
 
-## 데모 영상
+## 🎬 데모 영상
 
 ## 📌 주요 기능
 #### 로그인, 회원가입
