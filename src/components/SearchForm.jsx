@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { MdCancel } from "react-icons/md";
-import { useQueryClient, useQuery } from "react-query";
+import { useQueryClient, useQuery, qu } from "react-query";
 import { getSearchPins } from "../api/main/search";
 import { useNavigate } from "react-router-dom";
 import instance from "../api/axios";
@@ -17,11 +17,11 @@ export default function SearchForm() {
       console.log("Enter key pressed");
 
       // 여기에 엔터를 눌렀을 때 실행할 코드를 작성합니다.
-      const { data } = await instance.get(`/pins/search`, {
-        params: {
-          keyword: searchInput,
-        },
-      });
+      // const { data } = await instance.get(`/pins/search`, {
+      //   params: {
+      //     keyword: searchInput,
+      //   },
+      // });
       // const { data } = await instance2.get(`/photos/random`, {
       //   params: {
       //     client_id: process.env.REACT_APP_MY_KEY,
@@ -30,12 +30,14 @@ export default function SearchForm() {
       //   },
       // });
 
-      queryClient.setQueryData("searchResults", data);
+      // queryClient.setQueryData("searchResults", data);
       // const { data } = useQuery(["searchResults", searchInput], getSearchPins, {
       //   cacheTime: 1000,
       // });
       // setSearchInput("");
-      navigate(`/search/pins?keyword=${searchInput}`);
+      // queryClient.invalidateQueries("searchpins");
+      // queryCache.removeQueries("searchpins");
+      navigate(`/search/pins/${searchInput}`);
     }
   };
   function handleClear() {

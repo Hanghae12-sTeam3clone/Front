@@ -43,13 +43,13 @@ export const PinIconContainer = styled.div`
 
 export const UploadImgContainer = styled.div`
   padding: 15px;
-  width: 271px;
+  width: 300px;
   height: 470px;
   border-radius: 8px;
   background-color: #efefef;
   .dotted-border {
-    width: 100%;
-    height: 101%;
+    width: 102%;
+    height: 102%;
     border-radius: 8px;
     border: 2px dashed #dadada;
     display: flex;
@@ -85,8 +85,10 @@ export const ShowPin = styled.div`
 `;
 
 export const PinImage = styled.div`
-  width: 100%;
-  height: 100%;
+  position: relative;
+  top: -92%;
+  max-width: 100px;
+  max-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,11 +126,12 @@ export const LeftSection2 = styled.div`
 `;
 
 export const LeftSection3 = styled.div`
-  width: 100%;
+  width: 120%;
   height: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
   .save-from-site {
     width: 271px;
     height: 48px;
@@ -204,6 +207,7 @@ export const RightSection2 = styled.div`
     outline: none;
     font-size: 16px;
     background-color: transparent;
+    margin-left: 30px;
   }
   input:focus {
     border-bottom: 1px solid blue;
@@ -224,6 +228,7 @@ export const AddSubTextButton = styled.div`
   align-items: center;
   font-weight: 600;
   background-color: #efefef;
+  margin-left: 30px;
   cursor: pointer;
   &:hover {
     filter: brightness(0.9);

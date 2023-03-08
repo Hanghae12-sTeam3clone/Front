@@ -21,7 +21,10 @@ export const getPinDetailComment = async (payload) => {
 
 export const getPinDetail = async (id) => {
   try {
-    const response = await api.get(`/pins/${id}`, {});
+
+    const response = await api.get(`/pins/${id}`,  {
+    })
+
     console.log(response);
     return response;
   } catch (error) {
@@ -35,17 +38,40 @@ export const switchDetail = async (payload) => {
       title: payload.title,
       content: payload.content,
     });
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-export const removeDetail = async (payload) => {
-  try {
-    await api.delete(`/pins/${payload.id}`);
-  } catch (error) {
-    console.log(error);
+      console.log(response)
+      return response
+  } catch(error) {
+      console.log(error)
+    }
   }
-};
+
+  export const removeDetail = async(payload) => {
+    try {
+      await api.delete(`/pins/${payload.id}`);
+    }
+    catch(error) {
+      console.log(error)
+    }
+  }
+
+  export const likeSwitch = async (payload) => {
+    try{
+      await api.post(`/pins/${payload.id}/likes`, {      
+      });
+    }
+    catch(error) {
+      console.log(error)
+    }
+  };
+
+  export const deleteLike = async (payload) => {
+    try{
+      await api.delete(`/pins/${payload.id}/likes`, {      
+      });
+    }
+    catch(error) {
+      console.log(error)
+    }
+  };
+

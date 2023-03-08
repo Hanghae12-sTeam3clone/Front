@@ -6,6 +6,7 @@ export const DivSection = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  margin-top: 100px;
 `
 
 export const DivDetailBox = styled.div`
@@ -13,7 +14,7 @@ export const DivDetailBox = styled.div`
   flex-wrap: wrap;
   min-width: 508px;
   max-width: 1020px;
-  width: ${props => props.isWide ? '1020px' : '508px'};
+  width: 1020px;
   box-shadow: 0px 0px 15px 0px #ccc;
   border-radius: 32px; 
 `
@@ -31,12 +32,12 @@ export const DivImageBox = styled.div`
   object-fit: cover;
   border-radius: 15px;
   
-  padding: ${props=> (props.isWide && !props.isWideImage) ? '20px' : '' };
+  padding: 20px;
   img{
     width: 100%;
-    height: ${props => props.isLongImage ? '100%' : ''};
+    height: 100%;
     object-fit: cover;
-    border-radius: ${props => props.isWide ?  props => props.isWideImage ? '15px 0 0 15px' : '15px' : '15px 15px 0 0'} ;
+    border-radius: 15px 0 0 15px;
   }
 `
 
@@ -102,10 +103,7 @@ export const DivIconBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  
-  border-radius: ${props => props.size/2}px;
+  margin-right: 20px;
   &:hover{
     background-color: rgb(233, 233, 233);
   }  
@@ -132,22 +130,15 @@ export const DefaultIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  
-  border-radius: ${props => props.size/2}px;
+  margin-right: 20px;
   &:hover{
     background-color: rgb(233, 233, 233);
   }  
 `
 export const DivProfileImageBox = styled.div`
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  
   img{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: ${props => props.size/2}px;
   }
 `

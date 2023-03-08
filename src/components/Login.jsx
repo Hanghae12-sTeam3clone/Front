@@ -14,11 +14,15 @@ const Login = ({ show, onHide, check }) => {
     onSuccess: (response) => {
       console.log("res: ", response);
       if (response) {
-        alert("로그인 성공");
+        alert("로그인 성공?");
         check();
         onHide();
         navigate("/");
       }
+    },
+    onError: (error) => {
+      console.log(error);
+      alert("아이디, 비밀번호 다시한번 확인하세요");
     },
   });
 

@@ -23,6 +23,7 @@ const router = createBrowserRouter([
       { path: "pins/:id", element: <Detail /> },
       { path: "search/pins", element: <SearchPins /> },
 
+
       // { path: "profile/:id", element: <Profile /> },
     ],
   },

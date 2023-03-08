@@ -23,6 +23,11 @@ const Header = () => {
   console.log("현재 check", ckeckLogin);
   const LogoutHandler = () => {
     localStorage.removeItem("access_token");
+
+
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("nickname");
+
     setCheckLogin(false);
     alert("로그아웃 완료");
   };

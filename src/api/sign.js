@@ -15,31 +15,38 @@ export const signUp = async (newUser) => {
 
 // 로그인
 export const logIn = async (userInfo) => {
-  try {
-    const response = await api.post(
-      "/users/login",
-      userInfo,
+  // try {
+  const response = await api.post(
+    "/users/login",
+    userInfo,
 
-      { withCredentials: true }
-    );
+    { withCredentials: true }
+  );
 
-    console.log("api : ", response.headers.authorization);
-    const token = response.headers.authorization;
-    const tokenN = token.split(" ")[1];
-    console.log(tokenN);
 
-    // 로컬 스토리지에 access_token과 refresh_token 저장
-    localStorage.setItem("access_token", tokenN);
-    // localStorage.setItem("refresh_token", response.data.refresh_token);
-    // axios
-    //axios 인스턴스의 default header에 access_token 설정
-    // api.defaults.headers.common[
-    //   "Authorization"
-    // ] = `Bearer ${response.data.access_token}`;
-    return response;
-  } catch (error) {
-    console.log(error.response.data);
-    alert("로그인 실패");
-    return "이메일 혹은 비밀번호를 확인하세요.";
-  }
+  console.log("api : ", response);
+  const token = response.headers.authorization;
+  const refresh_token = response.headers.refresh_token;
+  const nickname = response.data.nickname;
+  const tokenN = token.split(" ")[1];
+  const re_tokenN = refresh_token.split(" ")[1];
+
+  // 로컬 스토리지에 access_token과 refresh_token 저장
+  localStorage.setItem("access_token", tokenN);
+  localStorage.setItem("refresh_token", re_tokenN);
+  localStorage.setItem("nickname", nickname);
+
+  // localStorage.setItem("refresh_token", response.data.refresh_token);
+  // axios
+  //axios 인스턴스의 default header에 access_token 설정
+  // api.defaults.headers.common[
+  //   "Authorization"
+  // ] = `Bearer ${response.data.access_token}`;
+  return response;
+  // } catch (error) {
+  //   console.log(error.response.data);
+  //   alert("로그인 실패");
+  //   return new Error("로그인 실패");
+  // }
+
 };

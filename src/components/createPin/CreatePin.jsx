@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { upload } from '../../api/create';
 
@@ -29,9 +29,8 @@ const CreatePin = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
-  const [showMessage, setShowMessage] = useState(false)
+  const [preview, setPreview] = useState("");
 
-  const imgRef = useRef();
   
   const uploadMutation = useMutation(upload, {
     onSuccess: (response) => {
@@ -41,18 +40,16 @@ const CreatePin = () => {
     onError: (response) => {
       console.log(response);
     },
-  });  const handleFocus = () => {
-    setShowMessage(true);
-};
+  });  
 
 const saveImgFile = (e) => {
   e.preventDefault();
   const file = e.target.files[0];
-	// const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //       setImage(reader.result);
-  //  	};
+	const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreview(reader.result);
+   	};
   setImage(file);
 };
 
@@ -126,25 +123,21 @@ const handleSubmit = async(e) => {
                 </Recommendation>
                 </div>
               </UploadImgContainer>
-
+              <PinImage>
               <input
                 type="file"
                 name="upload-img"
                 id="upload-img"
                 accept="image/*"
                 aria-hidden="false"
-                // ref={imgRef}
-                // onChange={(e) => setImage(e.target.files[0])}
+                tabIndex="0"
                 onChange={saveImgFile}
               />
+              {preview ? <img src={preview} /> : null}
+              </PinImage>
             </label>
             <ShowPin
 >
-              <PinImage>
-                <img alt="pin_image" 
-                src={image ? image :`/images/icon/user.png`}
-                />
-              </PinImage>
             </ShowPin>
           </LeftSection2>
           <LeftSection3>
@@ -171,9 +164,7 @@ const handleSubmit = async(e) => {
               value={title}
               id="title"
               onChange={(e) => setTitle(e.target.value)}
-              // onFocus={handleFocus}
             />
-            {/* {showMessage ? <>처음 40자는 일반적으로 피드에서 볼 수 있습니다.</> : null} */}
             <input
               className="input-content"
               placeholder="사람들에게 회원님의 핀에 대해 설명해 보세요  😃"
