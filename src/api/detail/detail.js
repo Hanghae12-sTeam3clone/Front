@@ -21,8 +21,10 @@ export const getPinDetailComment = async (payload) => {
 
 export const getPinDetail = async (id) => {
   try {
+
     const response = await api.get(`/pins/${id}`,  {
     })
+
     console.log(response);
     return response;
   } catch (error) {
@@ -36,6 +38,7 @@ export const switchDetail = async (payload) => {
       title: payload.title,
       content: payload.content,
     });
+
       console.log(response)
       return response
   } catch(error) {
@@ -71,3 +74,4 @@ export const switchDetail = async (payload) => {
       console.log(error)
     }
   };
+
