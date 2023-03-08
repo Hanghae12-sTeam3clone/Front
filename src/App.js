@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       { path: "create", element: <Create /> },
 
       { path: "detail", element: <Detail /> },
-      { path: "pin/:id", element: <Detail /> },
+      { path: "pins/:id", element: <Detail /> },
       { path: "search/pins", element: <SearchPins /> },
 
       // { path: "profile/:id", element: <Profile /> },
