@@ -20,6 +20,7 @@
 - **Tool** : Git, Notion
 
 ## 🎬 데모 영상
+* https://youtu.be/4drxM-p_ubA
 
 ## 📌 주요 기능
 #### 로그인, 회원가입
