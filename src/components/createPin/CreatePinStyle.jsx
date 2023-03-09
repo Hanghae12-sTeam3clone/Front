@@ -87,8 +87,8 @@ export const ShowPin = styled.div`
 export const PinImage = styled.div`
   position: relative;
   top: -92%;
-  max-width: 100px;
-  max-height: 100px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -20,7 +20,7 @@ export default function Pin({ item }) {
 
       <StImage
         src={item.image}
-        onClick={() => navigate(`/pin/${item.title}`)}
+        onClick={() => navigate(`/pins/${item.id}`)}
       />
 
       {ishover ? (

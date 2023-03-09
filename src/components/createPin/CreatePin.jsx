@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { upload } from '../../api/create';
 
 
@@ -30,12 +31,13 @@ const CreatePin = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
+  const navigate = useNavigate();
 
   
   const uploadMutation = useMutation(upload, {
     onSuccess: (response) => {
       console.log(response)
-      
+      navigate("/");
     },
     onError: (response) => {
       console.log(response);
@@ -133,7 +135,7 @@ const handleSubmit = async(e) => {
                 tabIndex="0"
                 onChange={saveImgFile}
               />
-              {preview ? <img src={preview} /> : null}
+              {preview ? <img src={preview} style={{ width: "300px", height: "550px", position: "absolute", marginLeft: "200px", marginTop: "200px" }}/> : null}
               </PinImage>
             </label>
             <ShowPin

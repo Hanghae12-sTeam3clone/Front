@@ -52,7 +52,7 @@ export default function MainLayout() {
         size: SIZE,
       },
     });
-    console.log("res", res);
+    console.log("res", res.data.content);
 
     return {
       lists: res.data,

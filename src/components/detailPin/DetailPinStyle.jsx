@@ -79,7 +79,7 @@ export const DivInfoBox = styled.div`
   }
   .contentbox{
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
   }
   .profilebox{
     display: flex;
