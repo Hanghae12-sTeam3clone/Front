@@ -21,8 +21,10 @@ export const getPinDetailComment = async (payload) => {
 
 export const getPinDetail = async (id) => {
   try {
+
     const response = await api.get(`/pins/${id}`,  {
     })
+
     console.log(response);
     return response;
   } catch (error) {
@@ -40,6 +42,8 @@ export const switchDetail = async (payload) => {
       headers: { "Content-Type": "multipart/form-data"}
     }
   );
+    });
+
       console.log(response)
       return response
   } catch(error) {
@@ -75,3 +79,4 @@ export const switchDetail = async (payload) => {
       console.log(error)
     }
   };
+

@@ -1,8 +1,24 @@
 import React, { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { DivSection, DivDetailBox, DivLeftBox, DivRightBox, DivImageBox, DivInfoBox, DivIconBox, DivButton, DefaultIcon, DivProfileImageBox } from './DetailPinStyle';
-import { deleteLike, getPinDetail, likeSwitch, removeDetail, switchDetail } from "../../api/detail/detail";
+
+import {
+  DivSection,
+  DivDetailBox,
+  DivLeftBox,
+  DivRightBox,
+  DivImageBox,
+  DivInfoBox,
+  DivIconBox,
+  DivButton,
+  DefaultIcon,
+  DivProfileImageBox,
+} from "./DetailPinStyle";
+import {
+  getPinDetail,
+  removeDetail,
+  switchDetail,
+} from "../../api/detail/detail";
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -11,9 +27,20 @@ import {  FaHeart, FaRegHeart } from "react-icons/fa";
 
 
 
+import {  FaHeart, FaRegHeart } from "react-icons/fa";
+
+
 export default function DetailPin() {
   const queryClient = useQueryClient();
   const { id } = useParams();
+
+
+  const [comments, setComments] = useState([
+    { nickname: "KIKI", text: "굳굳" },
+    { nickname: "LULU", text: "어머나" },
+  ]);
+
+
   const [index, setIndex] = useState("0")
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("")
@@ -48,8 +75,14 @@ export default function DetailPin() {
       },
     })
 
-    const onSelect = (e) => {
+
+  const onSelect = (e) => {
     e.preventDefault();
+
+
+  // 댓글 추가
+  const handleAdd = (comment) => setComments([...comments, comment]);
+
       setIndex(e.target.value);
       if (e.target.value==='1'){
         setShow(true)
@@ -113,8 +146,9 @@ export default function DetailPin() {
           </DivLeftBox>
           <DivRightBox>
             <DivInfoBox>
-              <div className='headerbox'>
+              <div className="headerbox">
                 <div>
+
                   <DivIconBox>
                   {data.data.nickname == localStorage.getItem("nickname")? 
                   <StyledSelect value={index} onChange={onSelect} >
@@ -137,6 +171,7 @@ export default function DetailPin() {
                   </DefaultIcon>
                   <DefaultIcon s>
                     <svg height="20" width="20" viewBox="0 0 24 24" aria-hidden="true" aria-label role="img">
+
                       <path d="M10.52 3.11a2 2 0 013.59 0l2.06 4.17c.02.06.08.1.15.11l4.6.67a2 2 0 011.1 3.41l-3.32 3.25a.2.2 0 00-.06.17l.78 4.58a2 2 0 01-2.9 2.11l-4.11-2.16a.2.2 0 00-.19 0l-4.11 2.16a2 2 0 01-2.9-2.1l.78-4.59a.2.2 0 00-.06-.17l-3.32-3.25a2 2 0 011.1-3.41l4.6-.67a.2.2 0 00.15-.1zm3.9 5.15l-1.75-3.53a.4.4 0 00-.71 0L10.2 8.26a2 2 0 01-1.5 1.1l-3.9.56a.4.4 0 00-.23.69l2.83 2.75a2 2 0 01.57 1.77L7.31 19a.4.4 0 00.58.42l3.5-1.83a2 2 0 011.86 0l3.48 1.83a.4.4 0 00.59-.42l-.67-3.88a2 2 0 01.57-1.77l2.83-2.75a.4.4 0 00-.22-.69l-3.9-.56a2 2 0 01-1.51-1.1z"></path>
                     </svg>
                   </DefaultIcon>
@@ -145,6 +180,7 @@ export default function DetailPin() {
                   <DivButton>저장</DivButton>
                 </div>
               </div>
+
     
               <div className='titlebox'>
               {data.data.title}
@@ -153,12 +189,15 @@ export default function DetailPin() {
               {data.data.content}
               </div>
               <div className='profilebox'>
+
                 <div>
-                  <DivProfileImageBox size='48' />
+                  <DivProfileImageBox size="48" />
                 </div>
                 <div>
+
                   <p className='username'>{data.nickname}</p>
                   <p>좋아요 {data.data.likeCount}명</p>
+
                 </div>
                 <StLikeButton onClick={() => likeButton(data.data)}>
                   {data.data.like ? <FaHeart /> : <FaRegHeart />}
@@ -168,6 +207,16 @@ export default function DetailPin() {
           </DivRightBox>
         </DivDetailBox>
         <Modal show={show} onHide={handleClose}>
+
+      {/* 댓글 리스트 컴포넌트 */}
+      <StCommentDiv>
+        <CommentList comments={comments} setComments={setComments} />
+        <StCommentChildDiv>
+          <CommentInput onAdd={handleAdd} />
+        </StCommentChildDiv>
+      </StCommentDiv>
+    </DivSection>
+
         <Modal.Header closeButton>
           <Modal.Title>이 핀 수정하기</Modal.Title>
         </Modal.Header>
@@ -207,6 +256,7 @@ export default function DetailPin() {
       </Modal>
       </>
   </DivSection>
+
   );
 }
 
@@ -215,10 +265,12 @@ const StPrev = styled(Link)`
   left: 30px;
   top: 100px;
   text-decoration: none;
+
   color: black;
   font-size: 20px;
   font-weight: 800;
   `;
+
 const StCommentDiv = styled.div`
   /* position: relative; */
   width: 100%;
@@ -234,6 +286,7 @@ const StCommentChildDiv = styled.div`
   color: white;
   border-bottom-right-radius: 40px;
 `;
+
  const StLikeButton = styled.span`
  margin-top: 10px;
   font-size: 19px;
