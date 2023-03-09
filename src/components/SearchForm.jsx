@@ -37,7 +37,8 @@ export default function SearchForm() {
       // setSearchInput("");
       // queryClient.invalidateQueries("searchpins");
       // queryCache.removeQueries("searchpins");
-      navigate(`/search/pins/${searchInput}`);
+      // navigate(`/search/pins/${searchInput}`);
+      window.location.href = `/search/pins/${searchInput}`;
     }
   };
   function handleClear() {

@@ -10,9 +10,13 @@ import { useInfiniteScroll } from "./scroll/useInfiniteScroll";
 import axios from "axios";
 import instance from "../api/axios";
 
+import { useInView } from "react-intersection-observer";
+
 export default function MainLayout() {
   const SIZE = 10;
   const [isnext, setIsnext] = useState(true);
+  // const [ref, inView] = useInView();
+  // console.log(ref, inView);
   // const page = useInfiniteScroll();
   // console.log(page);
 
@@ -27,11 +31,9 @@ export default function MainLayout() {
     const scrollTop = document.documentElement.scrollTop;
     const clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight >= scrollHeight) {
-      console.log(scrollHeight);
-      console.log("왜안됨?");
+    if (scrollTop + clientHeight >= scrollHeight * 0.95) {
+      console.log("shj", scrollHeight);
       setPage(page + 1);
-      console.log("p", page);
       return fetchNextPage();
     }
   }
@@ -52,12 +54,15 @@ export default function MainLayout() {
         size: SIZE,
       },
     });
-    console.log("res", res.data.content);
+
+    console.log("res", res);
+    setTemps([...temp, ...res.data.content]);
+
 
     return {
       lists: res.data,
       offset: pageParam,
-      isLast: false,
+      isLast: res.data.last,
     };
   };
 
@@ -72,12 +77,10 @@ export default function MainLayout() {
   } = useInfiniteQuery(["pins"], fetchProjects, {
     getNextPageParam: (lastpage, pages) => {
       console.log("getnextPageParmr : ", lastpage, pages);
-      return lastpage.offset + 1;
+      if (!lastpage.isLast) return lastpage.offset + 1;
+      return undefined;
     },
-    onSuccess: (response) => {
-      console.log("onsucc", response.pages);
-      setTemps([...temp, ...response.pages[response.pages.length - 1].lists]);
-    },
+    onSuccess: (response) => {},
     onError: (error) => {
       console.log("error", error);
     },
@@ -195,6 +198,7 @@ export default function MainLayout() {
           })}
         </Masonry>
       </ResponsiveMasonry>
+      <div style={{ position: "absolute", bottom: "100px" }} />
     </StDiv>
   );
 }

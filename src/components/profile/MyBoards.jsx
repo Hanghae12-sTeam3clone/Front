@@ -7,20 +7,34 @@ export default function MyBoards() {
   return (
     <Stdiv>
       <div>
-        <Link to={`/profile/${param.id}/created`}>생성됨</Link>
-        <Link to={`/profile/${param.id}/saved`}>저장됨</Link>
+        <StLink to={`/profile/${param.id}/created`}>생성됨</StLink>
+        <StLink to={`/profile/${param.id}/saved`}>저장됨</StLink>
       </div>
 
-      <div>
+      <StPinDiv>
         <Outlet />
-      </div>
+      </StPinDiv>
     </Stdiv>
   );
 }
 
 const Stdiv = styled.div`
-  max-width: 90%;
+  width: 90%;
   text-align: center;
   margin: 20px;
   padding: 20px;
+`;
+
+const StPinDiv = styled.div`
+  width: 90%;
+`;
+
+const StLink = styled(Link)`
+  text-decoration-line: none;
+  margin: 20px;
+  color: black;
+  font-weight: bold;
+  &:hover {
+    color: gray;
+  }
 `;
