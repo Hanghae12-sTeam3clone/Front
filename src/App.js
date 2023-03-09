@@ -1,43 +1,25 @@
-import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./pages/Root";
-import Main from "./pages/Main";
-import Create from "./pages/Create";
-import Detail from "./pages/Detail";
+import logo from './logo.svg';
+import './App.css';
 
-import Profile from "./pages/Profile";
-import CreatedProfile from "./components/profile/CreatedProfile";
-import SavedProfile from "./components/profile/SavedProfile";
-import SearchPins from "./components/SearchPins";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    // errorElement: <NotFound />,
-    children: [
-      { index: true, element: <Main /> },
-      { path: "create", element: <Create /> },
-
-      { path: "detail", element: <Detail /> },
-      { path: "pins/:id", element: <Detail /> },
-      { path: "search/pins", element: <SearchPins /> },
-
-
-      // { path: "profile/:id", element: <Profile /> },
-    ],
-  },
-  {
-    path: "/profile/:id",
-    element: <Profile />,
-    children: [
-      { path: "created", element: <CreatedProfile /> },
-      { path: "saved", element: <SavedProfile /> },
-    ],
-  },
-]);
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
