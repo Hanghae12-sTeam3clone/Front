@@ -35,8 +35,76 @@ const Header = () => {
     navigate("/profile/123");
   };
 
+  const createPageHandler = () => {
+    navigate("/create")
+  }
+
   return (
-    <StHeaderDiv>
+    <>
+            {!ckeckLogin ? (
+              <StHeaderDiv>
+              <SignUp show={signUpModal} onHide={ToggleSignUpModal} />
+              <Login
+                show={LogInModal}
+                onHide={ToggleLoginModal}
+                check={() => setCheckLogin((prev) => !prev)}
+              />
+              <header>
+                <Navbar bg="light" expand="lg">
+                  <Navbar.Brand className="ms-3" href="/">
+                    <img
+                      alt=""
+                      src={logo}
+                      width="30"
+                      height="30"
+                      className="d-inline-block align-top"
+                    />{" "}
+                    <StHeadTitle>Pinterest</StHeadTitle>
+                  </Navbar.Brand>
+                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                  <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ms-auto w-5">
+                <Nav.Link>
+                  <StName>소개</StName>
+                  <StName>비지니스</StName>
+                  <StName>언론</StName>
+                  <Button
+                    variant="danger"
+                    style={{
+                      width: "80px",
+                      backgroundColor: "#ef1717",
+                      borderColor: "#ef1717",
+                      fontWeight: "bold",
+                      borderRadius: "30px"
+                    }}
+                    onClick={() => setLogInModal(true)}
+                  >
+                    로그인
+                  </Button>
+                </Nav.Link>
+                <Nav.Link>
+                  <Button
+                    variant="secondary"
+                    style={{
+                      width: "100px",
+                      backgroundColor: "#ececec",
+                      borderColor: "#ececec",
+                      color: "#000000",
+                      fontWeight: "bold",
+                      borderRadius: "30px"
+                    }}
+                    onClick={() => setSignUpModal(true)}
+                  >
+                    가입하기
+                  </Button>
+                </Nav.Link>
+              </Nav>
+              </Navbar.Collapse>
+        </Navbar>
+      </header>
+    </StHeaderDiv>
+            ) : (
+              <StHeaderDiv>
       <SignUp show={signUpModal} onHide={ToggleSignUpModal} />
       <Login
         show={LogInModal}
@@ -53,7 +121,9 @@ const Header = () => {
               height="30"
               className="d-inline-block align-top"
             />{" "}
+
             <Button variant="dark">홈</Button>
+
           </Navbar.Brand>
           <Nav.Link>
             <Button
@@ -65,41 +135,41 @@ const Header = () => {
             </Button>
           </Nav.Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <SearchForm />
-          <Navbar.Collapse id="basic-navbar-nav">
-            {!ckeckLogin ? (
-              <Nav className="ms-auto w-5">
-                <Nav.Link>
+          <Nav.Link>
                   <Button
                     variant="danger"
                     style={{
-                      width: "100px",
-                      backgroundColor: "#ef1717",
-                      borderColor: "#ef1717",
-                      fontWeight: "bold",
-                    }}
-                    onClick={() => setLogInModal(true)}
-                  >
-                    로그인
-                  </Button>
-                </Nav.Link>
-                <Nav.Link>
-                  <Button
-                    variant="secondary"
-                    style={{
-                      width: "100px",
-                      backgroundColor: "#ececec",
+                      width: "50px",
+                      backgroundColor: "#ffffff",
                       borderColor: "#ececec",
                       color: "#000000",
+                      fontSize: "17px",
                       fontWeight: "bold",
                     }}
-                    onClick={() => setSignUpModal(true)}
+                    onClick={() => navigate("/")}
                   >
-                    가입하기
+                    홈
+                  </Button>
+                  </Nav.Link>
+                  <Nav.Link>
+                  <Button
+                    variant="danger"
+                    style={{
+                      width: "90px",
+                      fontSize: "16px",
+                      backgroundColor: "#ffffff",
+                      borderColor: "#ececec",
+                      color: "#000000",
+
+                      fontWeight: "bold",
+                    }}
+                    onClick={createPageHandler}
+                  >
+                    만들기
                   </Button>
                 </Nav.Link>
-              </Nav>
-            ) : (
+          <SearchForm />
+          <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ms-auto w-5">
                 <Nav.Link>
                   <Button
@@ -132,11 +202,12 @@ const Header = () => {
                   </Button>
                 </Nav.Link>
               </Nav>
-            )}
-          </Navbar.Collapse>
+              </Navbar.Collapse>
         </Navbar>
       </header>
     </StHeaderDiv>
+            )}
+    </>
   );
 };
 
@@ -170,9 +241,20 @@ const StInputBox = styled.input`
   }
 `;
 
+
 const StSpan = styled.span`
   background-color: black;
   color: white;
   width: 100px;
   border-radius: 50%;
 `;
+
+const StHeadTitle = styled.text`
+  color: red;
+`
+const StName = styled.text`
+  margin-right: 30px;
+  font-size: 16px;
+  font-weight: 1000;
+  color: black;
+`

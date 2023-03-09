@@ -54,9 +54,10 @@ export default function MainLayout() {
         size: SIZE,
       },
     });
+
     console.log("res", res);
-    // console.log("onsucc", response.pages);
     setTemps([...temp, ...res.data.content]);
+
 
     return {
       lists: res.data,

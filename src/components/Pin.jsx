@@ -34,6 +34,7 @@ export default function Pin({ item }) {
   return (
     <StDiv onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <StImage
+
         src={item.imageMain}
         onClick={() => navigate(`/pins/${item.id}`)}
       />
